@@ -6,6 +6,29 @@
     <meta name="description" content="231 class Assignment">
     <meta charset="utf-8">
 
+    <script>
+            window.onload = function() {
+                // Function to get the parameter from the URL
+                function getParameterByName(name, url = window.location.href) {
+                    name = name.replace(/[\[\]]/g, '\\$&');
+                    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                        results = regex.exec(url);
+                    if (!results) return null;
+                    if (!results[2]) return '';
+                    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                }
+
+                // Extract the URL to validate from the 'uri' parameter
+                const urlToValidate = getParameterByName('uri');
+                
+                // Check if URL to validate exists and redirect to the validator
+                if (urlToValidate) {
+                    const validatorUrl = `https://validator.w3.org/check?uri=${encodeURIComponent(urlToValidate)}&output=html`;
+                    window.location.href = validatorUrl; // Redirect automatically to the validator
+                }
+            }
+        </script>
+
 </head>
 
 <body>
